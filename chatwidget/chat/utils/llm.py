@@ -7,7 +7,8 @@ import torch
 torch.cuda.empty_cache()
 
 # Base URL of the local LLM API
-host = "https://ec2-35-95-160-121.us-west-2.compute.amazonaws.com/serve/v1/"
+#host = "https://ec2-35-95-160-121.us-west-2.compute.amazonaws.com/serve/v1/"
+host = "http://localhost:8000/serve/v1/"
 httpx_client = httpx.Client(
     limits=httpx.Limits(max_keepalive_connections=10, max_connections=20),
     timeout=30.0,  

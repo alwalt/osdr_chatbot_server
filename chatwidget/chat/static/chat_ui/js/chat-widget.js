@@ -54,7 +54,7 @@ async function sendMessage() {
 
         try {
             // Send message to the server
-            const response = await fetch('/chat/', {
+            const response = await fetch('/serve/chat/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

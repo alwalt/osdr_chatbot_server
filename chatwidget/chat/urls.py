@@ -4,6 +4,6 @@ from .views.pages import index_view  # Import the home view
 
 
 urlpatterns = [
-    path('chat/', chat_api, name='chat_api'),  # Route for chat API
-    path('', index_view, name='index'),  # Serve home view at the root URL
+    path('serve/chat/', chat_api, name='chat_api'),  # Route for chat API
+    path('serve/', index_view, name='index'),  # Serve home view at the root URL
 ]

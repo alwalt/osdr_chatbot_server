@@ -117,7 +117,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/serve/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'chat', 'static'),
@@ -136,3 +136,6 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379",
     }
 }
+
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-35-95-160-121.us-west-2.compute.amazonaws.com', 'localhost', '127.0.0.1']
