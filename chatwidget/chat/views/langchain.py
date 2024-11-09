@@ -45,7 +45,7 @@ def chat(request):
             contextualize_q_prompt = ChatPromptTemplate.from_messages(
                 [
                     ("system", contextualize_q_system_prompt),
-                    MessagesPlaceholder("chat_history"),
+                    MessagesPlaceholder("osdr_chat_history"),
                     ("human", "{input}"),
                 ]
             )
@@ -66,7 +66,7 @@ def chat(request):
             qa_prompt = ChatPromptTemplate.from_messages(
                 [
                     ("system", system_prompt),
-                    MessagesPlaceholder("chat_history"),
+                    MessagesPlaceholder("osdr_chat_history"),
                     ("human", "{input}"),
                 ]
             )
@@ -78,7 +78,7 @@ def chat(request):
                 rag_chain,
                 get_session_history, # Redis in-memory cache
                 input_messages_key="input",
-                history_messages_key="chat_history",
+                history_messages_key="osdr_chat_history",
                 output_messages_key="answer",
             )
 

@@ -12,16 +12,20 @@ print(f"Connecting to Redis at: {REDIS_URL}")
 # Initialize a Redis client
 redis_client = redis.StrictRedis.from_url(REDIS_URL)
 
+APP_PREFIX = "osdr:chat:"  # Prefix for App 1 keys
+# APP_PREFIX = ""
+
 def clear_chat_history_in_redis():
     """Clear only chat-related entries in Redis without dropping the schema."""
     try:
-        # Assuming the keys for chat entries follow a pattern like "chat:*"
-        keys = redis_client.keys("chat:*")  # Get all chat keys
+        # Assuming the keys for chat entries follow APP_PREFIX
+        keys = redis_client.keys(f"{APP_PREFIX}*")  # Get all chat keys
+        print('what are the keys:', keys)
         if keys:
             redis_client.delete(*keys)  # Delete only chat keys
-            print(f"Deleted {len(keys)} chat-related keys.")
+            print(f"Deleted {len(keys)} chat-related keys for OSDR app.")
         else:
-            print("No chat-related keys found.")
+            print("No chat-related keys found for OSDR.")
     except Exception as e:
         print(f"Error clearing chat-related entries in Redis: {e}")
 
@@ -31,10 +35,7 @@ clear_chat_history_in_redis()
 
 def get_session_history(session_id: str) -> BaseChatMessageHistory:
     """Get or create a Redis-based session history and add initial messages if empty."""
-    history = RedisChatMessageHistory(session_id=session_id, redis_url=REDIS_URL)
-    print('after history')
-
-    # print(history)
+    history = RedisChatMessageHistory(session_id=session_id, key_prefix=APP_PREFIX,  redis_url=REDIS_URL, index_name="idx:osdr_chat_history")
     
     # Check if the history is empty (new session)
     if len(history.messages) == 0:
