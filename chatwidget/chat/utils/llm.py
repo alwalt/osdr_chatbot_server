@@ -18,7 +18,8 @@ httpx_client = httpx.Client(
 OPENAI_API_KEY = "EMPTY"
 
 # Choose a model
-MODELTORUN = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+#MODELTORUN = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+MODELTORUN = "/home/woalvara/vllm_serve/models/Llama-3.1-8B-Instruct"
 
 # Instantiate a vLLM model instance.
 def load_llm():
